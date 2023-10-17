@@ -39,6 +39,21 @@ const userSchema = Yup.object().shape({
     .required('Required'),
 });
 
+// let schema = Yup.object({
+//   isBig: Yup.boolean(),
+//   count: Yup.number()
+//     .when('isBig', {
+//       is: true, // alternatively: (val) => val == true
+//       then: schema => schema.min(5),
+//       otherwise: schema => schema.min(0),
+//     })
+//     .when('$other', ([other], schema) =>
+//       other === 4 ? schema.max(6) : schema
+//     ),
+// });
+
+// await schema.validate(value, { context: { other: 4 } });
+
 export const UserForm1 = ({ onSubmitHandler, onSubmitLoginHandler }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(null);
@@ -53,9 +68,7 @@ export const UserForm1 = ({ onSubmitHandler, onSubmitLoginHandler }) => {
     //   actions.resetForm();
     // },
     onSubmit: (values, actions) => {
-      console.log('====================================');
       console.log(values);
-      console.log('====================================');
       if (isSignup) {
         onSubmitHandler(values);
       } else onSubmitLoginHandler(values);
